@@ -60,7 +60,9 @@ const Welcome: React.FC = () => {
     const router = useRouter()
 
     const login = useGoogleLogin({
-        onSuccess: () => router.push(PAGES.TRADE),
+        onSuccess: (tokenResponse) => {
+            router.push(tokenResponse?.access_token ? PAGES.TRADE : PAGES.LOGIN_ERROR)
+        },
         onError: () => router.push(PAGES.LOGIN_ERROR),
     })
 
