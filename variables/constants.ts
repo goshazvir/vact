@@ -10,3 +10,6 @@ export const DEFAULT_CURRENCY = 'GBP'
 export const ADD_ORDER = 'ADD_ORDER'
 export const REMOVE_ORDER = 'REMOVE_ORDER'
 export const UPDATE_ORDER = 'UPDATE_ORDER'
+export const SHOW_MORE = 'SHOW_MORE'
+
+export const DEFAULT_SHOW_ORDERS = 5

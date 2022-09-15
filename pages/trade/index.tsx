@@ -6,16 +6,11 @@ import { styled } from '@mui/material/styles'
 import Stack from '@mui/material/Stack'
 import Button, { ButtonProps } from '@mui/material/Button'
 import Container from '@mui/material/Container'
-import {
-    DEFAULT_LOCALE,
-    ADD_ORDER,
-    REMOVE_ORDER,
-    UPDATE_ORDER
-} from '../../variables/constants'
+import { DEFAULT_LOCALE } from '../../variables/constants'
 import { CONTENT, PAGE_TITLE } from '../../variables/data'
 import CreateOrder from '../../components/CreateOrder'
+import { reducers } from '../../reducers'
 import Listing from '../../components/Listing'
-import { Order } from '../../types'
 import fixerRequest from '../api/fixer'
 
 const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
@@ -30,40 +25,15 @@ const TradePage: NextPage<any> = ({ currencySymbolsData }) => {
     const handleOpenModal = () => setIsModalOpened(true)
     const handleCloseModal = () => setIsModalOpened(false)
 
-    const [orders, dispatchOrders] = useReducer((state: Order[], action: any) => {
-        switch (action.type) {
-            case ADD_ORDER:
-                const maxId = Math.max(...state.map(item => item.id))
-                const currentMaxId = Math.max(maxId, state.length)
+    const { showMoreReducer, ordersReducer } = reducers
 
-                return [
-                ...state,
-                {
-                    id: currentMaxId + 1,
-                    name: action.name,
-                    description: action.description,
-                    price: action.price,
-                    currency: action.currency,
-                }
-            ]
-            case REMOVE_ORDER:
-                return state.filter((order) => order.id != action.id)
-            case UPDATE_ORDER:
-                const getUpdatedOrderIndex  = state.findIndex(item => item.id === action.id)
-                const newState = Object.assign([], state)
-                newState.splice(getUpdatedOrderIndex, 1, {
-                    id: action.id,
-                    name: action.name,
-                    description: action.description,
-                    price: action.price,
-                    currency: action.currency,
-                })
+    const [orders, dispatchOrders] = useReducer(
+        ordersReducer, []
+    )
 
-                return newState
-            default:
-                return state
-        }
-    }, [])
+    const [isShowMoreBtnFired, dispatchIsShowMoreBtnFired] = useReducer(
+        showMoreReducer, false
+    )
 
     return (
         <>
@@ -81,6 +51,8 @@ const TradePage: NextPage<any> = ({ currencySymbolsData }) => {
                     orders={orders}
                     dispatchOrders={dispatchOrders}
                     currencySymbolsData={currencySymbolsData}
+                    isShowMoreBtnFired={isShowMoreBtnFired}
+                    dispatchIsShowMoreBtnFired={dispatchIsShowMoreBtnFired}
                 />
                 {isModalOpened &&
                     <CreateOrder

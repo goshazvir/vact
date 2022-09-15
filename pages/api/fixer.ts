@@ -23,6 +23,15 @@ type CurrenceeConveerResponce = {
   result: number
 }
 
+const mockCurrencySymbols = {
+  success: false,
+  symbols: {}
+}
+
+const mockCurrencyConvert = {
+  success: false,
+  result: 0
+}
 
 const fixerRequest = () => {
   const myHeaders = new Headers()
@@ -35,17 +44,27 @@ const fixerRequest = () => {
   }
 
   const getCurrencySymbols = async (): Promise<CurrencySymbolsResponce> => {
-    return await fetch('https://api.apilayer.com/fixer/symbols', requestOptions)
-      .then(response => response.json())
-      .then(data => data.symbols)
-      .catch(error => console.log('error', error))
+   try {
+      const responce = await fetch('https://api.apilayer.com/fixer/symbols', requestOptions)
+      const json = await responce.json()
+
+      return json.symbols
+   } catch (error) {
+    console.error('error', error)
+    return mockCurrencySymbols
+   }
   }
 
   const getCurrencyConvert = async (from: string,  amount: string): Promise<CurrenceeConveerResponce> => {
-    return await fetch(`https://api.apilayer.com/fixer/convert?to=${DEFAULT_CURRENCY}&from=${from}&amount=${amount}`, requestOptions)
-      .then(response => response.json())
-      .then(data => data.result.toFixed(1))
-      .catch(error => console.log('error', error))
+    try {
+      const responce = await fetch(`https://api.apilayer.com/fixer/convert?to=${DEFAULT_CURRENCY}&from=${from}&amount=${amount}`, requestOptions)
+      const json = await responce.json()
+
+      return json.result.toFixed(1)
+    } catch (error) {
+      console.error('error', error)
+      return mockCurrencyConvert
+    }
   }
 
   return {

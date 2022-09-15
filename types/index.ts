@@ -35,3 +35,8 @@ export type IsValidFormProps = {
     price: string,
     currency: string
 }
+
+export type ShowMoreReducerAction = {
+    type: 'SHOW_MORE'
+    data: boolean
+}
