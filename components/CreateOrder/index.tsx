@@ -203,12 +203,16 @@ const CreateOrder: React.FC<CreateOrderProps> = ({
                         </Select>
                     </FormControl>
                     <Stack direction="row" justifyContent="flex-end" spacing={2} mt='24px'>
-                        <ColorButton onClick={handleClickSave}>
-                            {CONTENT[DEFAULT_LOCALE].TRADE_BTN_SAVE}
-                        </ColorButton>
-                        <Button onClick={handleClickClear} variant="outlined">
-                            {CONTENT[DEFAULT_LOCALE].TRADE_BTN_CLEAR}
-                        </Button>
+                        {CONTENT[DEFAULT_LOCALE].TRADE_BTN_SAVE && (
+                            <ColorButton onClick={handleClickSave}>
+                                {CONTENT[DEFAULT_LOCALE].TRADE_BTN_SAVE}
+                            </ColorButton>
+                        )}
+                        {CONTENT[DEFAULT_LOCALE].TRADE_BTN_CLEAR && (
+                            <Button onClick={handleClickClear} variant="outlined">
+                                {CONTENT[DEFAULT_LOCALE].TRADE_BTN_CLEAR}
+                            </Button>
+                        )}
                     </Stack>
                 </Box>
             </Fade>

@@ -75,14 +75,18 @@ const Welcome: React.FC = () => {
                 flexDirection="column"
                 height="100vh"
             >
-                <Typography variant="h2" mb={4} color='#fff'>
-                    {CONTENT[DEFAULT_LOCALE].WELCOME_TITLE}
-                </Typography>
-                <Stack spacing={2} direction="row" alignItems="center">
-                    <ColorButton onClick={() => login()} size="large">
-                        {CONTENT[DEFAULT_LOCALE].WELCOME_BTN}
-                    </ColorButton>
-                </Stack>
+                {CONTENT[DEFAULT_LOCALE].WELCOME_TITLE && (
+                    <Typography variant="h2" mb={4} color='#fff'>
+                        {CONTENT[DEFAULT_LOCALE].WELCOME_TITLE}
+                    </Typography>
+                )}
+                {CONTENT[DEFAULT_LOCALE].WELCOME_BTN && (
+                    <Stack spacing={2} direction="row" alignItems="center">
+                        <ColorButton onClick={() => login()} size="large">
+                            {CONTENT[DEFAULT_LOCALE].WELCOME_BTN}
+                        </ColorButton>
+                    </Stack>
+                )}
                 <StyledRightDiv />
                 <StyledLeftDiv />
             </Grid>

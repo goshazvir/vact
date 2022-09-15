@@ -51,7 +51,7 @@ const Listing: React.FC<OrderProps> = ({
     } = useListing(orders, dispatchOrders, dispatchIsShowMoreBtnFired)
 
     const listingOrdersProps = {dispatchOrders, handleUpdate, dispatchIsShowMoreBtnFired}
-    const showwMoreProps  = {orders, isShowMoreBtnFired, handleClick}
+    const showMoreProps  = {orders, isShowMoreBtnFired, handleClick}
 
     return (
         <>
@@ -68,11 +68,11 @@ const Listing: React.FC<OrderProps> = ({
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        <ListingOrders {...listingOrdersProps} orders={limitedOrders} />
+                        {limitedOrders && <ListingOrders {...listingOrdersProps} orders={limitedOrders} />}
                     </TableBody>
                 </Table>
             </TableContainer>
-            <ShowMore {...showwMoreProps} />
+            <ShowMore {...showMoreProps} />
             {isModalOpened &&
                 <CreateOrder
                     open={isModalOpened}

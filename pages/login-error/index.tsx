@@ -70,12 +70,16 @@ const LogInErrorPage: NextPage = () => {
                     flexDirection="column"
                     height="100vh"
                 >
-                    <Typography variant="h2" mb={4} color='#fff'>
-                        {CONTENT[DEFAULT_LOCALE].LOGIN_ERROR_TITLE}
-                    </Typography>
-                    <Link href="/">
-                        <ColorButton href='/'>{CONTENT[DEFAULT_LOCALE].LOGIN_ERROR_BTN}</ColorButton>
-                    </Link>
+                    {CONTENT[DEFAULT_LOCALE].LOGIN_ERROR_TITLE && (
+                        <Typography variant="h2" mb={4} color='#fff'>
+                            {CONTENT[DEFAULT_LOCALE].LOGIN_ERROR_TITLE}
+                        </Typography>
+                    )}
+                    {CONTENT[DEFAULT_LOCALE].LOGIN_ERROR_BTN && (
+                        <Link href="/">
+                            <ColorButton href='/'>{CONTENT[DEFAULT_LOCALE].LOGIN_ERROR_BTN}</ColorButton>
+                        </Link>
+                    )}
                     <StyledRightDiv />
                     <StyledLeftDiv />
                 </Grid>

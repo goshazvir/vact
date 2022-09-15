@@ -42,18 +42,22 @@ const TradePage: NextPage<any> = ({ currencySymbolsData }) => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Container maxWidth="lg">
-                <Stack direction="row" justifyContent='flex-end'  mt={4}>
-                    <ColorButton onClick={handleOpenModal}>
-                        {CONTENT[DEFAULT_LOCALE].TRADE_BTN_CREATE_ORDER}
-                    </ColorButton>
-                </Stack>
-                <Listing
-                    orders={orders}
-                    dispatchOrders={dispatchOrders}
-                    currencySymbolsData={currencySymbolsData}
-                    isShowMoreBtnFired={isShowMoreBtnFired}
-                    dispatchIsShowMoreBtnFired={dispatchIsShowMoreBtnFired}
-                />
+                {CONTENT[DEFAULT_LOCALE].TRADE_BTN_CREATE_ORDER && (
+                    <Stack direction="row" justifyContent='flex-end'  mt={4}>
+                        <ColorButton onClick={handleOpenModal}>
+                            {CONTENT[DEFAULT_LOCALE].TRADE_BTN_CREATE_ORDER}
+                        </ColorButton>
+                    </Stack>
+                )}
+                {currencySymbolsData && orders && (
+                    <Listing
+                        orders={orders}
+                        dispatchOrders={dispatchOrders}
+                        currencySymbolsData={currencySymbolsData}
+                        isShowMoreBtnFired={isShowMoreBtnFired}
+                        dispatchIsShowMoreBtnFired={dispatchIsShowMoreBtnFired}
+                    />
+                )}
                 {isModalOpened &&
                     <CreateOrder
                         open={isModalOpened}
